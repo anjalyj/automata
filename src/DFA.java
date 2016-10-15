@@ -1,13 +1,14 @@
 import java.util.Arrays;
+import java.util.List;
 
 public class DFA {
-    private String state;
-    private String[] alphabetSet;
+    private List<String> state;
+    private List<String> alphabetSet;
     private TransitionFunction transitionFunction;
     private String initialState;
-    private String[] finalState;
+    private List<String> finalState;
 
-    public DFA(String state, String[] alphabetSet, TransitionFunction transitionFunction, String initialState, String[] finalState) {
+    public DFA(List<String> state, List<String> alphabetSet, TransitionFunction transitionFunction, String initialState, List<String> finalState) {
         this.state = state;
         this.alphabetSet = alphabetSet;
         this.transitionFunction = transitionFunction;
@@ -24,13 +25,13 @@ public class DFA {
         for (String alphabet : givenString) {
             currentState = transitionFunction.getNextState(currentState,alphabet);
         }
-        return Arrays.asList(finalState).contains(currentState);
+        return finalState.contains(currentState);
 
     }
 
     private boolean isValidInput(String[] inputString) {
         for (String alphabet : inputString) {
-            if(!Arrays.asList(alphabetSet).contains(alphabet))
+            if(!alphabetSet.contains(alphabet))
                 return false;
         }
         return true;
